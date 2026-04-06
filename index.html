@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Saree Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false,
+        }
+      }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class='bx bx-hive'></i>
+            <span><strong>AI Saree</strong> Studio</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Tools <i class='bx bx-chevron-down'></i></a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <div class="user-profile" id="userProfileBtn">
+            <div class="avatar"><i class='bx bx-user'></i></div>
+            <div class="user-info">
+                <span class="name">Sign In</span>
+                <span class="credits">1 free credit</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="header">
+            <h1><span class="highlight">AI Saree</span> Studio</h1>
+            <p>Transform your photos into stunning artistic saree designs with AI</p>
+        </header>
+
+        <div class="credits-banner">
+            <div class="icon-box">
+                <i class='bx bx-sparkles'></i>
+            </div>
+            <div class="banner-text">
+                <span class="title">Credits Available</span>
+                <span class="amount">1 credit</span>
+            </div>
+        </div>
+
+        <div class="workspace">
+            <!-- Left Panel: Controls -->
+            <section class="controls-panel">
+                <h2 class="panel-title"><i class='bx bx-upload'></i> Create Your Art</h2>
+
+                <div class="control-group">
+                    <label>Upload Your Photo</label>
+                    <div class="upload-area" id="uploadArea">
+                        <i class='bx bx-upload'></i>
+                        <p>Click to upload</p>
+                        <span>PNG, JPG, GIF up to 5MB</span>
+                        <input type="file" id="fileInput" hidden accept="image/png, image/jpeg, image/gif">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Choose Saree Style</label>
+                    <div class="tabs" id="sareeTabs">
+                        <button class="tab active" data-target="traditional-styles"><i class='bx bx-sparkles'></i>
+                            Traditional Classics</button>
+                        <button class="tab" data-target="modern-styles"><i class='bx bx-bolt-circle'></i> Modern
+                            Artistry</button>
+                    </div>
+                    <div id="sareeStylesContainer">
+                        <div class="style-cards" id="traditional-styles">
+                            <div class="style-card active">
+                                <img src="assets/banarasi.png" alt="Banarasi Silk">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-diamond'></i> Banarasi Silk</h3>
+                                    <span>Wedding & Festive</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/chanderi.jpg" alt="Chanderi">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-briefcase'></i> Chanderi</h3>
+                                    <span>Formal & Office</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/maheshwari.png" alt="Maheshwari">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-sun'></i> Maheshwari</h3>
+                                    <span>Daily & Casual</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/kanchipuram.png" alt="Kanchipuram">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-crown'></i> Kanchipuram</h3>
+                                    <span>Wedding & Ceremonial</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/mysoresilk.png" alt="Mysore Silk">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-star'></i> Mysore Silk</h3>
+                                    <span>Royal & Special</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/pattu.png" alt="Pattu">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-party'></i> Pattu</h3>
+                                    <span>Festival & Celebration</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/patola.png" alt="Patola">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-palette'></i> Patola</h3>
+                                    <span>Special & Artistic</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/bandhani.png" alt="Bandhani">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-spa'></i> Bandhani</h3>
+                                    <span>Festival & Casual</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/kotadoria.png" alt="Kota Doria">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-water'></i> Kota Doria</h3>
+                                    <span>Daily & Summer</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/tant.png" alt="Tant">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-home-heart'></i> Tant</h3>
+                                    <span>Daily & Casual</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/baluchari.png" alt="Baluchari">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-heart'></i> Baluchari</h3>
+                                    <span>Cultural & Special</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/jamdani.png" alt="Jamdani">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-brush'></i> Jamdani</h3>
+                                    <span>Formal & Artistic</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="style-cards" id="modern-styles" style="display: none;">
+                            <div class="style-card active">
+                                <img src="assets/modern_1.png" alt="Minimalist Chic">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-shape-square'></i> Minimalist Chic</h3>
+                                    <span>Art & Fashion</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/modern_2.png" alt="Geometric Future">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-pyramid'></i> Geometric Future</h3>
+                                    <span>Editorial & Modern</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/modern_3.png" alt="Watercolor Dreams">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-palette'></i> Watercolor Dreams</h3>
+                                    <span>Creative & Artistic</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/modern_4.png" alt="Abstract Expression">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-brush-alt'></i> Abstract Expression</h3>
+                                    <span>Art Gallery & Modern</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/modern_5.png" alt="Fashion Editorial">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-camera'></i> Fashion Editorial</h3>
+                                    <span>Editorial & Professional</span>
+                                </div>
+                            </div>
+                            <div class="style-card">
+                                <img src="assets/modern_6.png" alt="Avant-garde Art">
+                                <div class="card-info">
+                                    <h3><i class='bx bx-mask'></i> Avant-garde Art</h3>
+                                    <span>Art Exhibition & Modern</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Draping Style</label>
+                    <div class="grid-options-3">
+                        <div class="option-card active">
+                            <h4>Nivi Style</h4>
+                            <p>Classic modern draping</p>
+                            <span>All India</span>
+                        </div>
+                        <div class="option-card">
+                            <h4>Bengali Style</h4>
+                            <p>Pleats at back</p>
+                            <span>West Bengal</span>
+                        </div>
+                        <div class="option-card">
+                            <h4>Gujarati Style</h4>
+                            <p>Pallu in front</p>
+                            <span>Gujarat</span>
+                        </div>
+                        <div class="option-card">
+                            <h4>Maharashtrian Style</h4>
+                            <p>Dhoti style</p>
+                            <span>Maharashtra</span>
+                        </div>
+                        <div class="option-card">
+                            <h4>Tamil Style</h4>
+                            <p>Madisar style</p>
+                            <span>Tamil Nadu</span>
+                        </div>
+                        <div class="option-card">
+                            <h4>Modern Style</h4>
+                            <p>Contemporary draping</p>
+                            <span>Contemporary</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Blouse Style</label>
+                    <div class="grid-options-3">
+                        <div class="option-card active">
+                            <h4>Traditional</h4>
+                            <p>Classic blouse with traditional design</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Modern</h4>
+                            <p>Contemporary blouse design</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Sleeveless</h4>
+                            <p>Sleeveless blouse</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Backless</h4>
+                            <p>Backless blouse for modern look</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Crop Top</h4>
+                            <p>Crop top style blouse</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Pattern Intensity</label>
+                    <div class="grid-options-4">
+                        <div class="option-card-small">
+                            <h4>Minimal</h4>
+                            <p>Subtle patterns</p>
+                        </div>
+                        <div class="option-card-small active">
+                            <h4>Moderate</h4>
+                            <p>Balanced patterns</p>
+                        </div>
+                        <div class="option-card-small">
+                            <h4>Heavy</h4>
+                            <p>Rich intricate patterns</p>
+                        </div>
+                        <div class="option-card-small">
+                            <h4>Elaborate</h4>
+                            <p>Very detailed patterns</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Background Setting</label>
+                    <div class="grid-options-3">
+                        <div class="option-card">
+                            <h4>Traditional Indoor</h4>
+                            <p>Classic Indian interior</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Garden</h4>
+                            <p>Beautiful garden setting</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Temple</h4>
+                            <p>Traditional temple background</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Palace</h4>
+                            <p>Royal palace setting</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Modern Studio</h4>
+                            <p>Contemporary studio</p>
+                        </div>
+                        <div class="option-card active">
+                            <h4>Auto Match</h4>
+                            <p>AI selects best background</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Choose Color</label>
+                    <p class="sub-label">Recommended for Banarasi Silk:</p>
+                    <div class="color-recommended">
+                        <div class="color-circle active-color" style="background-color: #d32f2f;">
+                            <i class='bx bx-check'></i>
+                        </div>
+                        <span>Deep Red</span>
+                    </div>
+                    <p class="sub-label">Or choose your own:</p>
+                    <div class="color-palette">
+                        <div class="color-circle" style="background-color: #ef4444;"></div>
+                        <div class="color-circle" style="background-color: #f97316;"></div>
+                        <div class="color-circle" style="background-color: #84cc16;"></div>
+                        <div class="color-circle" style="background-color: #10b981;"></div>
+                        <div class="color-circle" style="background-color: #06b6d4;"></div>
+                        <div class="color-circle" style="background-color: #3b82f6;"></div>
+                        <div class="color-circle" style="background-color: #6366f1;"></div>
+                        <div class="color-circle" style="background-color: #8b5cf6;"></div>
+                        <div class="color-circle" style="background-color: #d946ef;"></div>
+                        <div class="color-circle" style="background-color: #f43f5e;"></div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Styling Intensity</label>
+                    <div class="pill-options">
+                        <button class="pill">Subtle</button>
+                        <button class="pill active">Classic</button>
+                        <button class="pill">Bold</button>
+                    </div>
+                    <p class="sub-info">Balanced & Elegant</p>
+                </div>
+
+                <div class="control-group">
+                    <label>Photography Style</label>
+                    <div class="grid-options-2">
+                        <div class="option-card active">
+                            <h4>Natural Light</h4>
+                            <p>Soft & Natural</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Dramatic Light</h4>
+                            <p>Strong Contrast</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Soft Focus</h4>
+                            <p>Dreamy & Soft</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Sharp & Clear</h4>
+                            <p>Rich Details</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Studio Light</h4>
+                            <p>Professional Studio</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Editorial Style</h4>
+                            <p>Magazine Quality</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Dramatic Shadows</h4>
+                            <p>Theatrical Drama</p>
+                        </div>
+                        <div class="option-card">
+                            <h4>Cinematic</h4>
+                            <p>Movie Quality</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="generate-btn" id="generateBtn">
+                    <i class='bx bx-sparkles'></i> Generate Artistic Saree
+                </button>
+            </section>
+
+            <!-- Right Panel: Preview -->
+            <section class="preview-panel">
+                <h2 class="panel-title"><i class='bx bx-sparkles'></i> Your Artwork</h2>
+                <div class="preview-area" id="previewArea">
+                    <div class="empty-state">
+                        <i class='bx bx-sparkles'></i>
+                        <p>Upload a photo and create your artwork</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <div class="w-full font-sans">
+      <!-- 1. CTA Banner Section -->
+      <div class="bg-[#EA580C] py-16 px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to Create Stunning Saree Images?
+        </h2>
+        <p class="text-orange-100 text-lg mb-8">
+          Start generating beautiful AI-powered saree designs today.
+        </p>
+        <button
+          class="bg-white text-[#EA580C] font-bold py-3 px-8 rounded-xl inline-flex items-center justify-center gap-2 hover:bg-orange-50 transition-colors shadow-lg">
+          Try It Now
+          <i class="bx bx-right-arrow-alt text-xl"></i>
+        </button>
+      </div>
+  
+      <!-- 2. Main Footer Section -->
+      <footer class="bg-white pt-16 pb-8 px-4 md:px-8 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto">
+          <!-- Top Footer Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+  
+            <!-- Brand Info -->
+            <div class="col-span-1 lg:col-span-1">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-[#EA580C] text-xl">✨</span>
+                <h3 class="text-xl font-bold text-[#1E293B]">AI Saree <span class="font-normal">Studio</span></h3>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-6">
+                Create beautiful vintage saree images using advanced AI technology.
+                Powered by nano banana for stunning traditional Indian saree designs.
+              </p>
+              <a href="mailto:vedantsonawane5012@gmail.com" class="text-gray-400 hover:text-[#EA580C] transition-colors">
+                <i class="bx bx-envelope text-2xl"></i>
+              </a>
+            </div>
+  
+            <!-- Empty space for layout balance if needed, or spacer -->
+            <div class="hidden lg:block"></div>
+  
+            <!-- Quick Links -->
+            <div>
+              <h4 class="text-sm font-bold text-[#1E293B] uppercase tracking-wider mb-6">Quick Links</h4>
+              <ul class="space-y-4 text-gray-500">
+                <li><a href="index.html" class="hover:text-[#EA580C] transition-colors">Home</a></li>
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">AI Saree Generator</a></li>
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">AI Portrait Studio</a></li>
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">About</a></li>
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">AI Landscape Design</a></li>
+              </ul>
+            </div>
+  
+            <!-- Support -->
+            <div>
+              <h4 class="text-sm font-bold text-[#1E293B] uppercase tracking-wider mb-6">Support</h4>
+              <ul class="space-y-4 text-gray-500">
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">Contact Us</a></li>
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">Privacy Policy</a></li>
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">Terms of Service</a></li>
+                <li><a href="#" class="hover:text-[#EA580C] transition-colors">Refund Policy</a></li>
+              </ul>
+            </div>
+          </div>
+  
+          <!-- Middle Info Grid (Business & Payment) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 py-10 border-y border-gray-100">
+            <div>
+              <h4 class="text-sm font-bold text-[#1E293B] mb-4">Business Information</h4>
+              <div class="text-sm text-gray-500 space-y-1">
+                <p>AI Saree Studio</p>
+                <p>Email: <span class="text-[#EA580C]">vedantsonawane5012@gmail.com</span></p>
+                <p>Website: <span class="text-[#EA580C]">www.aisareegenerator.com</span></p>
+              </div>
+            </div>
+  
+            <div>
+              <h4 class="text-sm font-bold text-[#1E293B] mb-4">Payment Processing</h4>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                Payments are securely processed by <span class="text-[#EA580C] cursor-pointer">Creem</span>,
+                a trusted payment processor. We never store your full payment details on our servers.
+              </p>
+            </div>
+          </div>
+  
+          <!-- Bottom Copyright Bar -->
+          <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+            <p>© 2026 AI Saree Studio. All rights reserved.</p>
+            <p>Powered by nano banana AI technology</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="script.js"></script>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign in</h2>
+                <button type="button" class="modal-close" id="closeModalBtn"><i class='bx bx-x'></i></button>
+            </div>
+            <form id="signInForm" class="modal-body">
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-wrapper">
+                        <i class='bx bx-envelope icon-left'></i>
+                        <input type="email" id="emailInput" placeholder="your@email.com" required class="modal-input">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class='bx bx-lock-alt icon-left'></i>
+                        <input type="password" id="passwordInput" placeholder="••••••••" required
+                            class="modal-input has-right">
+                        <button type="button" id="togglePasswordBtn" class="btn-icon-right">
+                            <i class='bx bx-hide'></i>
+                        </button>
+                    </div>
+                    <button type="button" class="forgot-password">Forgot password?</button>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Sign in</button>
+                    <button type="button" id="googleSignInBtn" class="btn-outline">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                        Sign in with Google
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-text">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
