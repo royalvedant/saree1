@@ -170,11 +170,79 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Purchase Button Logic (Pricing Page) ---
+    const handlePayment = async (plan) => {
+      // 1. Create order on your backend
+      try {
+          const response = await fetch('http://localhost:5001/api/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: plan.price * 100, planName: plan.title }) // Convert to paise
+          });
+          const order = await response.json();
+
+          // 2. Initialize Razorpay Checkout
+          const options = {
+            key: "rzp_test_Saj7NdYTWA8bNg", // Use your Test Key ID here
+            amount: order.amount,
+            currency: order.currency,
+            name: "AI Saree Studio",
+            description: `Purchase ${plan.credits} Credits - ${plan.title}`,
+            order_id: order.id,
+            handler: async function (response) {
+              // 3. Send response to backend for verification
+              const verifyRes = await fetch('http://localhost:5001/api/verify-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  ...response,
+                  userId: auth.currentUser ? auth.currentUser.uid : "unknown",
+                  creditsToAdd: plan.credits
+                })
+              });
+              const verifyData = await verifyRes.json();
+              if(verifyData.status === "ok") alert("Payment Successful! Credits added.");
+              else alert("Payment verification failed.");
+            },
+            prefill: {
+              email: auth.currentUser ? auth.currentUser.email : "",
+            },
+            theme: {
+              color: "#EA580C"
+            }
+          };
+
+          const rzp = new window.Razorpay(options);
+          rzp.open();
+      } catch (e) {
+          console.error(e);
+          alert("Payment initialization failed. Ensure the backend acts on port 5001.");
+      }
+    };
+
     const purchaseButtons = document.querySelectorAll('.purchase-btn');
     purchaseButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const currentModal = document.getElementById('signInModal');
-            if (currentModal) currentModal.classList.add('active');
+            if (auth.currentUser) {
+                // Find details
+                const card = btn.closest('.relative');
+                if (!card) return;
+                const title = card.querySelector('h3').innerText;
+                let credits = 5;
+                let priceUSD = 2.99;
+                
+                if (title === 'Mini') { credits = 5; priceUSD = 2.99; }
+                else if (title === 'Basic') { credits = 30; priceUSD = 7.99; }
+                else if (title === 'Pro') { credits = 150; priceUSD = 29.99; }
+                else if (title === 'Creator Plan') { credits = 175; priceUSD = 29.99; }
+                
+                // Static USD to INR conversion (approx ₹83 per USD)
+                const priceINR = Math.round(priceUSD * 83);
+                
+                handlePayment({ price: priceINR, credits, title });
+            } else {
+                const currentModal = document.getElementById('signInModal');
+                if (currentModal) currentModal.classList.add('active');
+            }
         });
     });
 
