@@ -251,7 +251,22 @@ document.addEventListener('DOMContentLoaded', () => {
     onAuthStateChanged(auth, (user) => {
         const userInfoName = document.querySelector('#userProfileBtn .name');
         const userAvatar = document.querySelector('#userProfileBtn .avatar');
-        
+        const purchaseButtons = document.querySelectorAll('.purchase-btn');
+
+        const authState = user ? 'signed_in' : 'signed_out';
+        switch (authState) {
+            case 'signed_in':
+                purchaseButtons.forEach(btn => {
+                    btn.innerHTML = "Purchase Now <i class='bx bx-right-arrow-alt w-4 h-4 text-xl'></i>";
+                });
+                break;
+            case 'signed_out':
+                purchaseButtons.forEach(btn => {
+                    btn.innerHTML = "Sign in to Purchase <i class='bx bx-right-arrow-alt w-4 h-4 text-xl'></i>";
+                });
+                break;
+        }
+
         if (user) {
             if (userInfoName) userInfoName.textContent = user.displayName || user.email.split('@')[0];
             if (userAvatar) {
