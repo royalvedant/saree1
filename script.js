@@ -17,11 +17,6 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
-// ✅ Use a dynamic URL based on hostname since we are using Vanilla JS
-const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? "http://localhost:5001"
-  : "https://your-backend-service.com"; // Replace with your real backend link
-
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- File Upload Logic ---
@@ -176,9 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Purchase Button Logic (Pricing Page) ---
     const handlePayment = async (plan) => {
-      // 1. Create order on your backend
+      // 1. Create order on your Netlify backend function
       try {
-          const response = await fetch(`${API_BASE_URL}/api/create-order`, {
+          const response = await fetch('/.netlify/functions/create-order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount: plan.price * 100, planName: plan.title }) // Convert to paise
@@ -195,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             order_id: order.id,
             handler: async function (response) {
               // 3. Send response to backend for verification
-              const verifyRes = await fetch(`${API_BASE_URL}/api/verify-payment`, {
+              const verifyRes = await fetch('/.netlify/functions/verify-payment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
