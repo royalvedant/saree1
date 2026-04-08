@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - AI Saree Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-50 min-h-screen flex flex-col">
+    <nav class="navbar flex flex-wrap items-center justify-between px-4 py-3 md:px-8 md:py-4 bg-white shadow-sm z-50">
+        <div class="logo order-1">
+            <i class='bx bx-hive'></i>
+            <span><strong>AI Saree</strong> Studio</span>
+        </div>
+        <ul
+            class="nav-links w-full md:w-auto mt-4 md:mt-0 flex justify-center flex-wrap gap-4 md:gap-8 order-3 md:order-2">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html">Tools <i class='bx bx-chevron-down'></i></a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+        </ul>
+        <div class="user-profile order-2 md:order-3" id="userProfileBtn">
+            <div class="avatar"><i class='bx bx-user'></i></div>
+            <div class="user-info hidden sm:flex flex-col">
+                <span class="name">Sign In</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content for About Page -->
+    <main class="flex-grow w-full font-sans">
+
+        <!-- 1. The "About & Mission" Section -->
+        <div class="bg-white py-20 px-6">
+            <div class="max-w-6xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-extrabold text-slate-900 mb-4">About AI Saree Studio</h1>
+                    <p class="text-xl text-slate-500">Bridging traditional Indian artistry with cutting-edge AI
+                        technology</p>
+                </div>
+
+                <!-- Mission Content -->
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <h2 class="text-3xl font-bold text-slate-900">Our Mission</h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            At AI Saree Generator, we believe in preserving and celebrating the rich heritage of Indian
+                            saree designs while making them accessible to everyone through the power of artificial
+                            intelligence.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            Our platform combines the traditional beauty of vintage saree patterns with modern AI
+                            technology, allowing users to create unique, personalized saree designs that honor centuries
+                            of Indian craftsmanship.
+                        </p>
+                        <div class="flex items-center gap-2 text-orange-600 font-semibold">
+                            <i class='bx bx-sparkles text-xl'></i>
+                            <span>Powered by nano banana AI technology</span>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card Right -->
+                    <div
+                        class="bg-slate-50 p-10 rounded-3xl border border-slate-100 flex flex-col items-center text-center shadow-sm">
+                        <div
+                            class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 mb-6">
+                            <i class='bx bx-palette text-3xl'></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Traditional Meets Technology</h3>
+                        <p class="text-slate-500">
+                            We use advanced AI models trained on thousands of traditional saree designs to generate
+                            authentic and beautiful patterns.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. The "Technology & Differences" Section -->
+        <div class="bg-slate-50 py-24 px-6">
+            <div class="max-w-6xl mx-auto">
+
+                <!-- Technology Cards -->
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-slate-900 mb-4">Technology Behind Our Platform</h2>
+                    <p class="text-slate-500">Built with cutting-edge AI technology and modern web standards</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-24">
+                    <div
+                        class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-6">
+                            <i class='bx bx-bolt-circle text-orange-500 text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-xl mb-4">nano banana AI</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Our core AI model is powered by nano banana
+                            technology, specifically trained on traditional Indian saree patterns and designs.</p>
+                    </div>
+
+                    <div
+                        class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-6">
+                            <i class='bx bx-globe text-purple-500 text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-xl mb-4">Modern Web Stack</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Built with the latest web standards for
+                            optimal performance and user experience across all devices.</p>
+                    </div>
+
+                    <div
+                        class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-6">
+                            <i class='bx bx-shield text-orange-400 text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-xl mb-4">Secure & Reliable</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Your data is protected with enterprise-grade
+                            security measures and reliable cloud infrastructure.</p>
+                    </div>
+                </div>
+
+                <!-- What Makes Us Different Grid -->
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-slate-900 mb-4">What Makes Us Different</h2>
+                    <p class="text-slate-500">Key features that set our platform apart</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-x-12 gap-y-16">
+                    <div class="text-center group">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i class='bx bx-palette text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">Authentic Designs</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Our AI is trained on authentic traditional
+                            saree patterns, ensuring culturally accurate and beautiful designs.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i class='bx bx-bolt-circle text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">Lightning Fast</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Generate high-quality saree designs in seconds
+                            with our optimized AI processing pipeline.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i class='bx bx-group text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">User-Friendly</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Intuitive interface designed for users of all
+                            technical levels, from beginners to professionals.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i class='bx bx-globe text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">Global Access</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Access our platform from anywhere in the world
+                            with our cloud-based infrastructure.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i class='bx bx-shield text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">Privacy First</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">We respect your privacy and don't store your
+                            personal designs without your explicit consent.</p>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mx-auto mb-6 group-hover:scale-110 transition-transform">
+                            <i class='bx bx-sparkles text-2xl'></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">Continuous Innovation</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">We constantly improve our AI models and add
+                            new features based on user feedback.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <div class="w-full font-sans mt-auto">
+        <!-- Main Footer Section -->
+        <footer class="bg-white pt-16 pb-8 px-4 md:px-8 border-t border-gray-100">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                    <!-- Brand Info -->
+                    <div class="col-span-1 lg:col-span-1">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-[#EA580C] text-xl">✨</span>
+                            <h3 class="text-xl font-bold text-[#1E293B]">AI Saree <span
+                                    class="font-normal">Studio</span></h3>
+                        </div>
+                        <p class="text-gray-500 leading-relaxed mb-6">
+                            Create beautiful vintage saree images using advanced AI technology.
+                            Powered by nano banana for stunning traditional Indian saree designs.
+                        </p>
+                        <a href="mailto:vedantsonawane5012@gmail.com"
+                            class="text-gray-400 hover:text-[#EA580C] transition-colors">
+                            <i class="bx bx-envelope text-2xl"></i>
+                        </a>
+                    </div>
+
+                    <div class="hidden lg:block"></div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="text-sm font-bold text-[#1E293B] uppercase tracking-wider mb-6">QUICK LINKS</h4>
+                        <ul class="space-y-4 text-gray-500">
+                            <li><a href="index.html" class="hover:text-[#EA580C] transition-colors">Home</a></li>
+                            <li><a href="tools.html" class="hover:text-[#EA580C] transition-colors">AI Saree
+                                    Generator</a></li>
+                            <li><a href="#" class="hover:text-[#EA580C] transition-colors">AI Portrait Studio</a></li>
+                            <li><a href="about.html"
+                                    class="hover:text-[#EA580C] transition-colors text-[#EA580C]">About</a></li>
+                            <li><a href="#" class="hover:text-[#EA580C] transition-colors">AI Landscape Design</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div>
+                        <h4 class="text-sm font-bold text-[#1E293B] uppercase tracking-wider mb-6">SUPPORT</h4>
+                        <ul class="space-y-4 text-gray-500">
+                            <li><a href="#" class="hover:text-[#EA580C] transition-colors">Contact Us</a></li>
+                            <li><a href="#" class="hover:text-[#EA580C] transition-colors">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-[#EA580C] transition-colors">Terms of Service</a></li>
+                            <li><a href="#" class="hover:text-[#EA580C] transition-colors">Refund Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 py-10 border-y border-gray-100">
+                    <div>
+                        <h4 class="text-sm font-bold text-[#1E293B] mb-4">Business Information</h4>
+                        <div class="text-sm text-gray-500 space-y-1">
+                            <p>AI Saree Studio</p>
+                            <p>Email: vedantsonawane5012@gmail.com</p>
+                            <p>Website: https://sareebyai.netlify.app</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-[#1E293B] mb-4">Payment Processing</h4>
+                        <p class="text-sm text-gray-500 leading-relaxed">
+                            Payments are securely processed by <span class="text-[#EA580C] cursor-pointer">Creem</span>,
+                            a trusted payment processor. We never store your full payment details on our servers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                    <p>© 2026 AI Saree Studio. All rights reserved.</p>
+                    <p>Powered by nano banana AI technology</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="script.js"></script>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign in</h2>
+                <button type="button" class="modal-close" id="closeModalBtn"><i class='bx bx-x'></i></button>
+            </div>
+            <form id="signInForm" class="modal-body">
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-wrapper">
+                        <i class='bx bx-envelope icon-left'></i>
+                        <input type="email" id="emailInput" placeholder="your@email.com" required class="modal-input">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class='bx bx-lock-alt icon-left'></i>
+                        <input type="password" id="passwordInput" placeholder="••••••••" required
+                            class="modal-input has-right">
+                        <button type="button" id="togglePasswordBtn" class="btn-icon-right">
+                            <i class='bx bx-hide'></i>
+                        </button>
+                    </div>
+                    <button type="button" class="forgot-password">Forgot password?</button>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Sign in</button>
+                    <button type="button" id="googleSignInBtn" class="btn-outline">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                        Sign in with Google
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-text">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
