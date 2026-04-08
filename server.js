@@ -5,13 +5,12 @@ const Razorpay = require('razorpay');
 const crypto = require('crypto');
 
 const app = express();
-// allow the frontend to access this backend regardless of exact localhost vs 127.0.0.1 typing
-app.use(cors({
-  origin: function(origin, callback) {
-    callback(null, true);
-  },
-  credentials: true
-}));
+// Update your CORS to allow your Netlify URL
+const corsOptions = {
+  origin: ["https://sareebyai.netlify.app", "http://localhost:8080"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const razorpay = new Razorpay({
@@ -58,6 +57,8 @@ app.post('/api/verify-payment', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
-    console.log(`✅ Backend running on http://localhost:${PORT}`);
+
+// Ensure you bind to 0.0.0.0 for Render
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Backend live on port ${PORT}`);
 });
