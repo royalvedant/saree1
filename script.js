@@ -178,6 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount: plan.price * 100, planName: plan.title }) // Convert to paise
           });
+          
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.details || "Function returned " + response.status);
+          }
           const order = await response.json();
 
           // 2. Initialize Razorpay Checkout
@@ -214,8 +219,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const rzp = new window.Razorpay(options);
           rzp.open();
       } catch (e) {
-          console.error(e);
-          alert("Payment initialization failed. Ensure the backend acts on port 5001.");
+          console.error("Payment Error Analysis:", e);
+          alert("Payment initialization failed: " + e.message + "\n\n(Did you forget to add RAZORPAY_KEY_ID in Netlify?)");
       }
     };
 
