@@ -1,6 +1,13 @@
 [build]
   functions = "netlify/functions"
 
+# Tools page POSTs here; static hosting has no Flask — route to serverless demo JSON
+[[redirects]]
+  from = "/try-on"
+  to = "/.netlify/functions/try-on"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"

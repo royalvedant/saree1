@@ -191,11 +191,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 clearTimeout(timeoutId);
 
+                const raw = await res.text();
                 let data = {};
                 try {
-                    data = await res.json();
+                    data = raw ? JSON.parse(raw) : {};
                 } catch {
-                    data = { error: 'Server returned an invalid response.' };
+                    data = {
+                        error: res.ok
+                            ? 'Server returned an invalid response.'
+                            : `Unexpected response (${res.status}). Static hosts need a /try-on handler (e.g. Netlify function) or the Flask app for real generation.`,
+                    };
                 }
 
                 if (!res.ok) {
