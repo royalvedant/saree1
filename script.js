@@ -226,24 +226,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const styleVideoMap = {
-                    'Banarasi Silk': 'static/banarasi-silk-preview.mov',
-                    'Chanderi': 'static/chanderi-preview.mov',
-                    'Maheshwari': 'static/maheshwari-preview.mov',
-                    'Kanchipuram': 'static/kanchipuram-preview.mov',
-                    'Mysore Silk': 'static/mysoresilk-preview.mov',
-                    'Pattu': 'static/pattu-preview.mov',
-                    'Patola': 'static/patola-preview.mov',
-                    'Bandhani': 'static/bandhani-preview.mov',
-                    'Kota Doria': 'static/kotadoria-preview.mov',
-                    'Tant': 'static/tant-preview.mov',
-                    'Baluchari': 'static/baluchari-preview.mov',
-                    'Jamdani': 'static/jamdani-preview.mov',
+                    'Banarasi Silk': '/static/banarasi-silk-preview.mov',
+                    'Chanderi': '/static/chanderi-preview.mov',
+                    'Maheshwari': '/static/maheshwari-preview.mov',
+                    'Kanchipuram': '/static/kanchipuram-preview.mov',
+                    'Mysore Silk': '/static/mysoresilk-preview.mov',
+                    'Pattu': '/static/pattu-preview.mov',
+                    'Patola': '/static/patola-preview.mov',
+                    'Bandhani': '/static/bandhani-preview.mov',
+                    'Kota Doria': '/static/kotadoria-preview.mov',
+                    'Tant': '/static/tant-preview.mov',
+                    'Baluchari': '/static/baluchari-preview.mov',
+                    'Jamdani': '/static/jamdani-preview.mov',
                 };
                 const selectedVideo = styleVideoMap[selectedSaree.altText];
 
                 if (selectedVideo) {
                     previewArea.innerHTML = `
-                        <video src="${selectedVideo}" class="result-image" autoplay muted loop playsinline controls></video>
+                        <video class="result-image" autoplay muted loop playsinline controls>
+                            <source src="${selectedVideo}" type="video/quicktime">
+                        </video>
                         <div style="position: absolute; bottom: 1rem; right: 1rem; background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 0.5rem;">
                             <i class='bx bx-play-circle' style='color: var(--primary)'></i> Video Preview
                         </div>

@@ -5,3 +5,9 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+# QuickTime previews: correct MIME helps <video> on some browsers/CDNs
+[[headers]]
+  for = "/static/*.mov"
+  [headers.values]
+    Content-Type = "video/quicktime"
