@@ -1,3 +1,13 @@
-node_modules/
-.DS_Store
+.vercel
+.env*.local
 .env
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+keys.json
+.DS_Store
+temp_person_*.png
+temp_saree_*.png
+temp_result_*.png
+static/*.png

@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently \"nodemon server.js\" \"http-server -p 8080 -c-1\""
+    "dev": "concurrently \"nodemon server.js\" \"http-server -p 8080-c-1\""
   },
   "dependencies": {
     "cors": "^2.8.6",

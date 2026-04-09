@@ -18,6 +18,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 document.addEventListener('DOMContentLoaded', () => {
+    let uploadedPersonFile = null;
     
     // --- File Upload Logic ---
     const uploadArea = document.getElementById('uploadArea');
@@ -56,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function handleFile(file) {
             if (file && file.type.startsWith('image/')) {
+                uploadedPersonFile = file;
                 uploadArea.innerHTML = `<i class='bx bx-check-circle' style='color: var(--primary);'></i><p>${file.name}</p><span>Ready to analyze</span>`;
                 uploadArea.style.borderColor = 'var(--primary)';
             }
@@ -130,7 +132,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const creditsEl = document.querySelector('.credits');
         const bannerAmountEl = document.querySelector('.banner-text .amount');
 
-        generateBtn.addEventListener('click', () => {
+        async function getSelectedSareeSelection() {
+            const selectedStyleCard = document.querySelector('#sareeStylesContainer .style-card.active img');
+            if (!selectedStyleCard) {
+                throw new Error('Please select a saree style.');
+            }
+
+            const imageSrc = selectedStyleCard.getAttribute('src');
+            const response = await fetch(imageSrc);
+            if (!response.ok) {
+                throw new Error('Could not load selected saree image.');
+            }
+
+            const blob = await response.blob();
+            const safeName = (selectedStyleCard.getAttribute('alt') || 'saree')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            return {
+                file: new File([blob], `${safeName || 'saree'}.png`, { type: blob.type || 'image/png' }),
+                previewSrc: imageSrc,
+            };
+        }
+
+        generateBtn.addEventListener('click', async () => {
+            if (!uploadedPersonFile) {
+                alert('Please upload your photo first.');
+                return;
+            }
+
             // UI feedback for generating
             generateBtn.disabled = true;
             generateBtn.innerHTML = "<i class='bx bx-loader-alt bx-spin' ></i> Generating...";
@@ -143,8 +173,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
-            // Simulate API call delay (3 seconds)
-            setTimeout(() => {
+            try {
+                const startMs = Date.now();
+                const selectedSaree = await getSelectedSareeSelection();
+                const formData = new FormData();
+                formData.append('person_image', uploadedPersonFile);
+                formData.append('saree_image', selectedSaree.file);
+                const controller = new AbortController();
+                const timeoutMs = 120000; // 2 minutes
+                const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+                const res = await fetch('/try-on', {
+                    method: 'POST',
+                    body: formData,
+                    signal: controller.signal,
+                });
+                clearTimeout(timeoutId);
+
+                let data = {};
+                try {
+                    data = await res.json();
+                } catch {
+                    data = { error: 'Server returned an invalid response.' };
+                }
+
+                if (!res.ok) {
+                    const message = data.suggestion || data.error || 'Image generation failed.';
+                    previewArea.innerHTML = `
+                        <div class="empty-state">
+                            <i class='bx bx-error-circle' style='color:#dc2626;'></i>
+                            <p>${message}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
                 // "Deduct" credit visually
                 if (creditsEl) creditsEl.innerText = "0 credits";
                 if (bannerAmountEl) {
@@ -153,7 +216,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Show result
-                const resultUrl = "https://images.unsplash.com/photo-1610189044275-5202868ff178?q=80&w=800&auto=format&fit=crop"; 
+                // In demo/testing mode, show the user-selected saree image in artwork preview.
+                const resultUrl = data.demo_mode ? selectedSaree.previewSrc : (data.result_url || selectedSaree.previewSrc);
+                const elapsedMs = Date.now() - startMs;
+                const minDelayMs = 3000;
+                if (elapsedMs < minDelayMs) {
+                    await new Promise((resolve) => setTimeout(resolve, minDelayMs - elapsedMs));
+                }
                 
                 previewArea.innerHTML = `
                     <img src="${resultUrl}" alt="Generated Saree" class="result-image">
@@ -161,28 +230,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         <i class='bx bx-check-circle' style='color: var(--primary)'></i> Generation Complete
                     </div>
                 `;
-
+            } catch (error) {
+                const isTimeout = error && error.name === 'AbortError';
+                previewArea.innerHTML = `
+                    <div class="empty-state">
+                        <i class='bx bx-error-circle' style='color:#dc2626;'></i>
+                        <p>${isTimeout ? 'Generation timed out after 2 minutes. Please try again with a clearer image and simpler saree reference.' : (error.message || 'Something went wrong. Please try again.')}</p>
+                    </div>
+                `;
+            } finally {
                 // Reset button
                 generateBtn.disabled = false;
                 generateBtn.innerHTML = "<i class='bx bx-sparkles'></i> Generate New Art";
-            }, 3000);
+            }
         });
     }
 
     // --- Purchase Button Logic (Pricing Page) ---
     const handlePayment = async (plan) => {
-      // 1. Create order on your Netlify backend function (via API rewrite)
+      // 1. Create order on your backend
       try {
-          const response = await fetch('/api/create-order', {
+          const response = await fetch('http://localhost:5001/api/create-order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount: plan.price * 100, planName: plan.title }) // Convert to paise
           });
-          
-          if (!response.ok) {
-            const errData = await response.json().catch(() => ({}));
-            throw new Error(errData.details || "Function returned " + response.status);
-          }
           const order = await response.json();
 
           // 2. Initialize Razorpay Checkout
@@ -195,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
             order_id: order.id,
             handler: async function (response) {
               // 3. Send response to backend for verification
-              const verifyRes = await fetch('/api/verify-payment', {
+              const verifyRes = await fetch('http://localhost:5001/api/verify-payment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -219,8 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const rzp = new window.Razorpay(options);
           rzp.open();
       } catch (e) {
-          console.error("Payment Error Analysis:", e);
-          alert("Payment initialization failed: " + e.message + "\n\n(Did you forget to add RAZORPAY_KEY_ID in Netlify?)");
+          console.error(e);
+          alert("Payment initialization failed. Ensure the backend acts on port 5001.");
       }
     };
 
